@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  .container
+	form(action='/register', method='post')
+	label Email Address:
+	input.form-control.login-input(name='email', type='email', required='', placeholder='')
+	label Username:
+	input.form-control.login-input(name='username', type='text', required='', placeholder='')
+	label Password:
+	input#password.form-control.login-input(name='password', type='password', required='', placeholder='')
+	button.btn.btn-primary.btn-large(type='submit') Register
