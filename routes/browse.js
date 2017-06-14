@@ -1,15 +1,17 @@
-var pg = require('pg');
+/** Michael Vincent 14/6
+*	Version 0.0.1
+*	Group 15
+*/
+
+var pg = require('pg').native;
 var express = require('express');
 var router = express.Router();
 
-//const pool = require('/database/database');
-console.log('test');
-var connectionString = "postgres://postgres:password@localhost:5432/auth;";
+var connectionString = process.env.DATABASE_URL;
 
 /* GET browse page. */
 router.get('/', function(req, res, next) {
 	var client = new pg.Client(connectionString);
-	
 	client.connect();
 	 // SQL Query > Select Data
  	var query = client.query("SELECT * FROM books_db");
