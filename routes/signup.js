@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var bodyParser = require("body-parser");
-var pg = require('pg').native
-  , connectionString = process.env.DATABASE_URL
+var pg = require('pg')
+  , connectionString = process.env.DATABASE_URL || 'postgres://postgres:password@localhost:5432/accounts'
   , client
   , query;
 
@@ -19,7 +19,6 @@ router.post('/send', function(req, res, next){
     var email = req.body.email;
     var FavBook = req.body.favoriteBook;
     var password = req.body.password;
-    
     
     //query = client.query('INSERT INTO accounts_db (UserID, Username, Password, EmailAddress) VALUES (DEFAULT, $1, $2, $3)', [name, email, password]);  
 });

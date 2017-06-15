@@ -5,28 +5,22 @@
 
 // dependencies
 var express = require('express')
-  , pg = require('pg').native
-  , connectionString = process.env.DATABASE_URL
-  , start = new Date()
-  , port = process.env.PORT || 8000
-  , client;
-  
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var path = require('path');
-var app=express();
+var port = process.env.PORT || 8000
+
+var client;
+var app = express();
 
 // PASSPORT Imports
 var passport = require('passport');
 var flash = require('connect-flash');
 var session = require('express-session');
 
-client = new pg.Client(connectionString);
-client.connect();
-
-// Engine setup
+// ENGINE setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade'); //html engine
 
