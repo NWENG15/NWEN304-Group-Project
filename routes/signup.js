@@ -19,6 +19,18 @@ router.post('/send', function(req, res, next){
     var email = req.body.email;
     var FavBook = req.body.favoriteBook;
     var password = req.body.password;
+    var password2 = req.body.confirmPassword;
+
+    // Local Validation
+	req.checkBody('name', 'Name is required').notEmpty();
+	req.checkBody('password', 'Password is required').notEmpty();
+	req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
+
+	// Error checking
+	var errors = req.validationErrors();
+
+	//if(error)
+
     
     //query = client.query('INSERT INTO accounts_db (UserID, Username, Password, EmailAddress) VALUES (DEFAULT, $1, $2, $3)', [name, email, password]);  
 });

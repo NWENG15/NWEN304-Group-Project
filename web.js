@@ -4,13 +4,13 @@
 */
 
 // dependencies
-var express = require('express')
+var express = require('express');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var path = require('path');
-var port = process.env.PORT || 8000
+var port = process.env.PORT || 8000;
 
 var client;
 var app = express();
@@ -40,6 +40,8 @@ app.use('/contact', require('./routes/contact'));
 app.use('/browse', require('./routes/browse'));
 app.use('/login', require('./routes/login'));
 app.use('/signup', require('./routes/signup'));
+app.use('/search', require('./routes/search'));
+
 
 // PASSPORT USE
 //require('./config/passport')(passport)
