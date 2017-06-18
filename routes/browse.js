@@ -7,7 +7,7 @@ var pg = require('pg');
 var express = require('express');
 var router = express.Router();
 
-var connectionString = process.env.DATABASE_URL || 'postgres://postgres:password@localhost:5432/accounts';
+var connectionString = process.env.DATABASE_URL || 'postgres://admin:secret@localhost:5432/accounts_db';
 
 /* GET browse page. */
 router.get('/', function(req, res, next) {

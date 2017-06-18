@@ -8,7 +8,7 @@
 */
 
 var pg = require('pg')
-  , connectionString = process.env.DATABASE_URL || 'postgres://postgres:password@localhost:5432/accounts'
+  , connectionString = process.env.DATABASE_URL || 'postgres://admin:secret@localhost:5432/BOOKS_DATABASE';
   , client
   , query;
 
