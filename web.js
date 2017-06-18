@@ -1,14 +1,11 @@
-/** Michael Vincent 14/6
-*	Version 0.0.1
-*	Group 15
-*/
-
 // dependencies
 var express = require('express');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
+var expressValidator = require('express-validator');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+
 var path = require('path');
 var port = process.env.PORT || 8000;
 
@@ -28,7 +25,9 @@ app.set('view engine', 'jade'); //html engine
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+//app.use(expressValidator());
 app.use(cookieParser());
+
 
 // PATH
 app.use(express.static(path.join(__dirname, 'public')));
@@ -52,5 +51,8 @@ app.use(flash());
 app.listen(port, function() {
   console.log('Listening on:', port);
 });
+
+//httpServer.listen(port);
+//httpsServer.listen(port);
 
 module.exports = app;

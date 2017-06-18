@@ -26,7 +26,6 @@ query = client.query(
 	'BookID 		SERIAL PRIMARY KEY, 		'+
 	'Author 		VARCHAR(255) 	NOT NULL, 	'+
 	'BookName 		VARCHAR(255) 	NOT NULL, 	'+
-	'Description 	VARCHAR(255) 	NOT NULL, 	'+
 	'Image 			VARCHAR(255) 	NOT NULL, 	'+
 	'Price			NUMERIC			NOT NULL)	'
 );
@@ -44,11 +43,79 @@ query = client.query(
 // ADDING BOOKS
 query = client.query(
 	'INSERT INTO books_db (	'+
-	'BookID, Author, BookName, Description, Image, Price) '+
-	'VALUES (DEFAULT, $1, $2, $3, $4, $5)',
+	'BookID, Author, BookName, Image, Price) '+
+	'VALUES (DEFAULT, $1, $2, $3, $4)',
 	['Margaret Atwood', 'The Handmaids Tale', 
-	'Set in the near future, it describes life in what was once the United States and is now called the Republic of Gilead',
-	'https://images-na.ssl-images-amazon.com/images/P/B003JFJHTS.jpg','8']
+	'https://images-na.ssl-images-amazon.com/images/P/B003JFJHTS.jpg','8.00']
+);
+query = client.query(
+	'INSERT INTO books_db (	'+
+	'BookID, Author, BookName, Image, Price) '+
+	'VALUES (DEFAULT, $1, $2, $3, $4)',
+	['Ishion Hutchinson',
+	 'House of Lords and Commons: Poems',
+	'https://images-na.ssl-images-amazon.com/images/I/51srsw6X7SL._AC_SR201,266_.jpg',
+	'12.75']
+);
+
+query = client.query(
+	'INSERT INTO books_db (	'+
+	'BookID, Author, BookName, Image, Price) '+
+	'VALUES (DEFAULT, $1, $2, $3, $4)',
+	['Carol Anderson',
+	 'White Rage: The Unspoken Truth of Our Racial Divide', 
+	'https://images-na.ssl-images-amazon.com/images/I/41lfBbuM%2BGL._AC_SR201,266_.jpg',
+	'6.30']
+);
+
+query = client.query(
+	'INSERT INTO books_db (	'+
+	'BookID, Author, BookName, Image, Price) '+
+	'VALUES (DEFAULT, $1, $2, $3, $4)',
+	['J.K. Rowling',
+	 'Harry Potter and the Sorcerer'+'s Stone', 
+	'https://images-na.ssl-images-amazon.com/images/I/51PxQCRCx0L._SX412_BO1,204,203,200_.jpg',
+	'13.25']
+);
+
+query = client.query(
+	'INSERT INTO books_db (	'+
+	'BookID, Author, BookName, Image, Price) '+
+	'VALUES (DEFAULT, $1, $2, $3, $4)',
+	['J.K. Rowling', 
+	'Harry Potter Order of the Phoenix', 
+	'https://images-na.ssl-images-amazon.com/images/I/51Nex9f38rL._SX322_BO1,204,203,200_.jpg',
+	'12.50']
+);
+
+query = client.query(
+	'INSERT INTO books_db (	'+
+	'BookID, Author, BookName, Image, Price) '+
+	'VALUES (DEFAULT, $1, $2, $3, $4)',
+	['J.K. Rowling', 
+	'Harry Potter and the Half-Blood Prince', 
+	'https://images-na.ssl-images-amazon.com/images/I/51uO1pQc5oL._SX329_BO1,204,203,200_.jpg',
+	'15.00']
+);
+
+query = client.query(
+	'INSERT INTO books_db (	'+
+	'BookID, Author, BookName, Image, Price) '+
+	'VALUES (DEFAULT, $1, $2, $3, $4)',
+	['J.K. Rowling', 
+	'Harry Potter and the Cursed Child', 
+	'https://images-na.ssl-images-amazon.com/images/I/518VhA3dH9L._SX329_BO1,204,203,200_.jpg',
+	'9.30']
+);
+
+query = client.query(
+	'INSERT INTO books_db (	'+
+	'BookID, Author, BookName, Image, Price) '+
+	'VALUES (DEFAULT, $1, $2, $3, $4)',
+	['John Grisham', 
+	'Camino Island', 
+	'https://images-na.ssl-images-amazon.com/images/I/512RnM56g6L.jpg',
+	'19.30']
 );
 
 

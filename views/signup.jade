@@ -1,6 +1,5 @@
-// Michael Vincent 14/6
-
 extends layout
+
 
 block content
   .main.container
@@ -22,3 +21,4 @@ block content
             label(for='pw2') Confirm Password:
             input#pw2.form-control(type='password', name='confirmPassword')
           button.btn.btn-primary(type='submit') Sign up
+        include messages

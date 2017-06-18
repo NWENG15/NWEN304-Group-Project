@@ -11,14 +11,14 @@ var pg = require('pg')
 client = new pg.Client(connectionString);
 client.connect();
 
-
+// Working very well, displaying database items
 
 /* GET search page. */
 router.get('/', function(req, res, next) {
+	var searchReq = req.query.s;
 	//console.log(req.query.s); 	// req.query.s retrieves name of search
 
-
-	query = client.query("SELECT * FROM books_db WHERE bookname LIKE '%"+req.query.s+"%';");
+	query = client.query("SELECT * FROM books_db WHERE bookname LIKE '%"+searchReq+"%' OR author LIKE '%"+searchReq+"%';");	// Add Genre, 
  	var results = []
  	// Stream results back one row at a time
  	query.on('row', function(row) {
@@ -28,15 +28,5 @@ router.get('/', function(req, res, next) {
  	 res.render('search', { title: 'Search', results: results });
  	 });
  	});
- 		
-// Iterate over database table 
-// pull out each name of every book
-// if name contains the substring
-// get the whole book object
-// add to array
-// send to search page ready for each book to be displayed
-
-
-
 
 module.exports = router;
