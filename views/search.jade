@@ -4,7 +4,6 @@ extends layout
 block content
 	.container
 		-var searchResults = results //- Get search results
-		h1 Search results
 		- for(var i = 0; i < searchResults.length; ++i){
 			.col-md-3
 				img(src=searchResults[i].image, alt=searchResults[i].bookname, align='middle', style='width:150px;height:150px;')

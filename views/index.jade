@@ -1,38 +1,49 @@
 extends layout
 // tabs only
+// Can fetch database when homepage is called
+// Change static values to database array values 
+// array[0].bookGenre
+// Not nessecary but would look nice
 block content
     .container
-        .jumbotron
-            .container
-                h1 Online Book store
-                p Welcome to my Online Book Store		
-    .sidebar
-        .block-wrap.sidebar
-            .block-header
-                h2 Top Sellers
-            .block
-                .tab-wrap.module.type-link.grid.tab-6245.tab-active
-                    .tab
-                        a.link-item-text-only.link-item(href='/')
-                            .link-text Book Placeholder
-                        a.link-item-text-only.link-item(href='/')
-                            .link-text Book Placeholder
-                                    .block-wrap.sidebar
-            .block-header
-                h2 Top Genres
-            .block
-                .tab-wrap.module.type-link.grid.tab-6245.tab-active
-                    .tab
-                        a.link-item-text-only.link-item(href='/')
-                            .link-text Book Placeholder
-                        a.link-item-text-only.link-item(href='/')
-                            .link-text Book Placeholder
-            .block-header
-                h2 Highest ratings
-            .block
-                .tab-wrap.module.type-link.grid.tab-6245.tab-active
-                    .tab
-                        a.link-item-text-only.link-item(href='/')
-                            .link-text Book Placeholder
-                        a.link-item-text-only.link-item(href='/')
-                            .link-text Book Placeholder
+        p
+        .row
+            p
+            .col-md-2
+                p.lead Browse
+                .list-group
+                    a.list-group-item(href='/browse/Drama') Drama
+                    a.list-group-item(href='#') Children
+                    a.list-group-item(href='#') Action
+                    a.list-group-item(href='#') Romance
+                    a.list-group-item(href='#') Mystery
+                    a.list-group-item(href='#') Horror
+
+                p.lead Popular Reading
+                .list-group
+                    a.list-group-item(href='#') Top10
+                    a.list-group-item(href='#') Highest rated
+                    a.list-group-item(href='#') Best Sellers
+                    a.list-group-item(href='#') Recommended reading
+
+                p.lead Popular Authors
+                .list-group
+                    a.list-group-item(href='#') J.K. Rowling
+                    a.list-group-item(href='#') John Grisham
+                    a.list-group-item(href='#') George R. R. Martin
+
+            -var bookResponse = results //- Get search results
+            - for(var i = 0; i < bookResponse.length; ++i){
+                .col-md-3
+                    p
+                    img(src=bookResponse[i].image, alt=bookResponse[i].bookname, align='middle', style='width:150px;height:150px;')
+
+                    p= bookResponse[i].bookname
+                    p= 'Author: '+bookResponse[i].author
+                    //- p= bookResponse[i].description
+                    p= 'Price: $'+bookResponse[i].price
+                    | &nbsp;
+                    button.btn.btn-primary(type='Purchase') Purchase
+                    | &nbsp;
+                    button.btn.btn-primary(type='Purchase') Add to Cart
+                -}        
