@@ -8,6 +8,9 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+	if(req.decoded == 'decoded'){
+		console.log("./ is decoded");
+	}
   res.render('index', { title: 'Home' });
 });
 
