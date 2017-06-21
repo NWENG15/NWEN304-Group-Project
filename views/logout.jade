@@ -7,8 +7,16 @@ html
     meta(name='viewport', content='width=device-width, initial-scale=1')
     link(href='stylesheets/bootstrap.css', rel='stylesheet')
     link(href='stylesheets/style.css', rel='stylesheet')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
+    script(src='../javascripts/login.js')
+
+    script.
+      $(document).ready(function(){
+      var user = localStorage.getItem('user');
+      $('h4').append(" "+localStorage.getItem('user')+'?');
+      });
   body
-  nav.navbar.navbar-inverse.navbar-fixed-top
+    nav.navbar.navbar-inverse.navbar-fixed-top
       .container
         .navbar-header
           button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
@@ -35,13 +43,9 @@ html
               a#logInButton(href='/login') Login
             li
               a#right(href='#')
-block content
-footer
-    p footer placeholder
-script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
-script(src='javascripts/bootstrap.js')
-script(src='javascripts/addToCart.js')
-script(src='javascripts/signup.js')
-script(src='javascripts/login.js')
-
-
+  block content
+    .container
+      h1.display-4.m-b-2 Logout
+      h4.display-4.m-b-2 Do you wish to logout as 
+      form#logout(name = 'logout' method = 'GET', action='/')
+        button.btn.btn-primary.btn-large.max-width(type='submit') Click to Logout

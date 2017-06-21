@@ -37,6 +37,8 @@ function validateForm(){
 	
 	var formData = {name: userName,email: userEmail, favoriteBook: favBook, password: password1};
 	$.post('/signup/send',formData);
+	
+	window.location = '/login';
 
 	//alert(str);
 	

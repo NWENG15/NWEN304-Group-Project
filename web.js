@@ -33,51 +33,41 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 //jsontoken
-app.set('passCode', 'SvQ^i"<Cp8 p0.Al'); // for jwt 
+app.set('passCode', 'Fpuqxcp9RoGDqEVF'); // for jwt 
 
 // PATH
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/login', require('./routes/login'));
 
 //middleware
 app.use(function (req,res,next){
-	console.log("token check function");
-//	req.decoded = 'decoded';    
-
-//	next();
-
-	
 	var token = req.body.token || req.query.token || req.headers['x-access-token'];
 	
 	//if a token is given
 	if(token){
-		console.log("found token");
-		jwt.verify(token, app.get('passCode'), function(err, decoded) {
-			if (err) {
-				console.log("token not authenticated");
-				return res.json({ success: false, message: 'Failed to authenticate token.' });
+		jwt.verify(token, String(app.get('passCode')), function(err, decoded) { //verify the validity of token
+			//token not authenticated
+			if (err) {				
+				if(err.message == 'jwt expired'){//login token has expired
+					res.render('forceLogout', { title: 'forceLogout' });
+					next();
+					return false;
+				}
+				
 				next();				
 			}
+			//token is valid
 			else{
-				console.log("token authenticated");
-				req.decoded = decoded;    
+				req.decoded = decoded; //add decoded parts to the request	
 				next();
 			}
 		
 		});
 	}
+	//no token given, continue on
 	else{
-		console.log("no token found");
 		next();
-		//res.redirect('/login');
-		//res.render('login', { title: 'tsdsd' });
-
 	}
-	next();
-	//res.redirect('/login');
-	// res.render('login', { title: 'tsdsd' });*/
-
 });
   
 
@@ -87,7 +77,7 @@ app.use('/about', require('./routes/about'));
 app.use('/contact', require('./routes/contact'));
 app.use('/browse', require('./routes/browse'));
 app.use('/signup', require('./routes/signup'));
-
+app.use('/login', require('./routes/login'));
 
 
 

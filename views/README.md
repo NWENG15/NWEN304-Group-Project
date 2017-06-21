@@ -1,3 +1,0 @@
-Group Project
-
-Online Bookstore
