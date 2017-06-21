@@ -25,7 +25,7 @@ router.get('/', function(req, res, next) {
  	 	results.push(row);
 	 });
  	 query.on('end', function() {
- 	 res.render('search', { title: 'Search', results: results });
+ 	 res.render('search', { title: 'Search', results: results, searchRequest: searchReq });
  	 });
  	});
 

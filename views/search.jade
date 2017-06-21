@@ -1,18 +1,22 @@
 extends layout
-
-
-block content
-	.container
-		-var searchResults = results //- Get search results
-		- for(var i = 0; i < searchResults.length; ++i){
-			.col-md-3
-				img(src=searchResults[i].image, alt=searchResults[i].bookname, align='middle', style='width:150px;height:150px;')
-				p= searchResults[i].bookname
-				p= 'Author: '+searchResults[i].author
-				//- p= searchResults[i].description
-				p= 'Price: $'+searchResults[i].price
-				| &nbsp;
-				button.btn.btn-primary(type='Purchase') Purchase
-				| &nbsp;
-				button.btn.btn-primary(type='Purchase') Add to Cart
-		-}
+block content  
+    .container
+        p
+        h1    Search results...
+        -var bookResponse = results //- Get search results
+        - for(var i = 0; i < bookResponse.length; ++i){
+                .col-md-3
+                    .panel.panel-primary
+                        .panel-body
+                            p
+                            img.img-responsive.center-block(src=bookResponse[i].image, alt=bookResponse[i].bookname, style='width:100px;height:100px;')
+                            | &nbsp;
+                            p= bookResponse[i].bookname
+                            p= 'Author: '+bookResponse[i].author
+                            //- p= bookResponse[i].description
+                            p= 'Price: $'+bookResponse[i].price
+                            | &nbsp;
+                            button.btn.btn-primary(type='Purchase') Purchase
+                            | &nbsp;
+                            button.btn.btn-primary(type='Purchase') Add to Cart
+            -}        

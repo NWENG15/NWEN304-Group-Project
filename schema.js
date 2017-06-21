@@ -54,7 +54,7 @@ query = client.query(
 	'BookID, Author, BookName, Genre, Image, Price) '+
 	'VALUES (DEFAULT, $1, $2, $3, $4, $5)',
 	['Ishion Hutchinson',
-	 'House of Lords and Commons: Poems', 'Poetry',
+	 'House of Lords: Poems', 'Poetry',
 	'https://images-na.ssl-images-amazon.com/images/I/51srsw6X7SL._AC_SR201,266_.jpg',
 	'12.75']
 );
@@ -64,7 +64,7 @@ query = client.query(
 	'BookID, Author, BookName, Genre, Image, Price) '+
 	'VALUES (DEFAULT, $1, $2, $3, $4, $5)',
 	['Carol Anderson',
-	 'The Unspoken Truth of Our Racial Divide', 'Drama',
+	 'Truth of Our Racial Divide', 'Drama',
 	'https://images-na.ssl-images-amazon.com/images/I/41lfBbuM%2BGL._AC_SR201,266_.jpg',
 	'6.30']
 );
@@ -74,7 +74,7 @@ query = client.query(
 	'BookID, Author, BookName, Genre, Image, Price) '+
 	'VALUES (DEFAULT, $1, $2, $3, $4, $5)',
 	['J.K. Rowling',
-	 'Harry Potter and the Sorcerer'+'s Stone', 'Action',
+	 'Harry Potter: The Sorcerer'+'s Stone', 'Action',
 	'https://images-na.ssl-images-amazon.com/images/I/51PxQCRCx0L._SX412_BO1,204,203,200_.jpg',
 	'13.25']
 );
@@ -94,7 +94,7 @@ query = client.query(
 	'BookID, Author, BookName,  Genre,Image, Price) '+
 	'VALUES (DEFAULT, $1, $2, $3, $4, $5)',
 	['J.K. Rowling', 
-	'Harry Potter and the Half-Blood Prince', 'Action',
+	'Harry Potter The Half-Blood Prince', 'Action',
 	'https://images-na.ssl-images-amazon.com/images/I/51uO1pQc5oL._SX329_BO1,204,203,200_.jpg',
 	'15.00']
 );
