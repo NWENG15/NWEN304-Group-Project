@@ -11,10 +11,16 @@ block content
                             | &nbsp;
                             p= bookResponse[i].bookname
                             p= 'Author: '+bookResponse[i].author
-                            //- p= bookResponse[i].description
                             p= 'Price: $'+bookResponse[i].price
                             | &nbsp;
-                            button.btn.btn-primary(type='Purchase') Purchase
+                            button#Information(value=bookResponse[i].bookid, href='/'+bookResponse[i].bookid) Information
+                            button#Price(value=bookResponse[i].price) Price
+                            button#AddToCart(value=bookResponse[i].bookname) Name
+                            br
                             | &nbsp;
-                            button.btn.btn-primary(type='Purchase') Add to Cart
-            -}  
+                            button.btn.btn-primary.pull-left(type='Purchase') Purchase
+                            | &nbsp;
+                            button.btn.btn-primary.pull-right(type='Purchase') Add to Cart
+            -} 
+script(src='/public/javascripts/addToCart.js')
+

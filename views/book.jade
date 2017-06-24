@@ -1,0 +1,10 @@
+block content
+    .container
+        .col-md-3
+            .panel.panel-primary
+                .panel-body
+                    img.img-thumbnail(src=book[0].image, alt='Cinque Terre', width='304', height='236')
+                    | &nbsp;
+                    p= book[0].bookname
+                    p= 'Author: '+book[0].author
+                    p= 'Price: $'+book[0].price

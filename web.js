@@ -34,13 +34,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // ROUTING USE
 app.use('/', require('./routes/index'));
-app.use('/about', require('./routes/about'));
-app.use('/contact', require('./routes/contact'));
 app.use('/browse', require('./routes/browse'));
 app.use('/login', require('./routes/login'));
 app.use('/signup', require('./routes/signup'));
 app.use('/search', require('./routes/search'));
-
+app.use('/book', require('./routes/book'));
 
 // PASSPORT USE
 //require('./config/passport')(passport)

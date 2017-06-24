@@ -11,18 +11,33 @@ var pg = require('pg')
 client = new pg.Client(connectionString);
 client.connect();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  //res.render('index', { title: 'Home' });
-  	query = client.query("SELECT * FROM books_db;");
- 	var results = []
- 	// Stream results back one row at a time
- 	query.on('row', function(row) {
+
+// http://localhost:8000/
+	router.get('/', function(req, res, next) {
+  		query = client.query("SELECT * FROM books_db;");
+ 		var results = []
+ 		query.on('row', function(row) {
  	 	results.push(row);
 	 });
- 	 query.on('end', function() {
- 	 res.render('index', { title: 'Home', results: results });
+ 	 	query.on('end', function() {
+ 	 	res.render('index', { title: 'Home', results: results });
  	});
 });
+
+	/* GET http://localhost:8000/:id */
+	router.get('/book/:id', function(req, res, next) {
+		var id = req.params.id;
+	// Validate id != undefined
+		console.log("SELECT * FROM books_db WHERE bookid="+req.params.id+";");
+  		query = client.query("SELECT * FROM books_db WHERE bookid="+req.params.id+";");
+ 		var book = [];
+ 		query.on('row', function(row) {
+ 	 	book.push(row);
+	 });
+ 	 	query.on('end', function() {
+ 	 	res.render('book', { title: 'Browse All Products', book : book });
+ 	});
+});
+
 
 module.exports = router;

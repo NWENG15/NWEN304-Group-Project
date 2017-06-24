@@ -26,34 +26,7 @@ Body
             li.active
               a(href='/') Home
             li
-              a.dropdown-toggle(href='#', data-toggle='dropdown') 
-                | Browse
-                b.caret
-              ul.dropdown-menu.multi-level
-                li.dropdown-submenu
-                  a.dropdown-toggle(href='#', data-toggle='dropdown') Genres
-                  ul.dropdown-menu
-                    li
-                      a(href='#') All
-                    li
-                      a(href='#') Drama
-                    li
-                      a(href='#') Action
-                    li
-                      a(href='#') Romance
-                    li  
-                      a(href='#') Mystery
-                    li
-                      a(href='#') Horror
-                    li
-                      a(href='#') Recommended
-                li.dropdown-submenu      
-                   a.dropdown-toggle(href='#', data-toggle='dropdown') Authors
-                    ul.dropdown-menu
-                      li
-                        a(href='#') J.K. Rowling
-                      li
-                        a(href='#') John Grisham                  
+              a(href='/browse') Browse              
             li
               a(href='/contact') Contact
             li
@@ -64,7 +37,7 @@ Body
               .input-group
                 input.form-control(type='text', name = 's', placeholder='Search')
                 span.input-group-btn
-                  button.btn.btn-default(type='submit')
+                  button#searchButton.btn.btn-default(type='submit')
                     span.glyphicon.glyphicon-search
 
           ul.nav.navbar-nav.navbar-right
@@ -85,3 +58,4 @@ block content
 script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
 script(src='javascripts/bootstrap.js')
 script(src='javascripts/addToCart.js')
+//script(src='javascripts/dropdownMenu.js')

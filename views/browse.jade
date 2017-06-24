@@ -1,45 +1,26 @@
 extends layout
-
 block content
-  .container
-    -var searchResults = results //- Get search results
-    h1 Search results
-    - for(var i = 0; i < searchResults.length; ++i){
-      .col-md-1
-        img(src=searchResults[i].image, alt=searchResults[i].bookname, align='middle', style='width:150px;height:150px;')
-        p= searchResults[i].bookname
-        p= 'Author: '+searchResults[i].author
-        //- p= searchResults[i].description
-        p= 'Price: $'+searchResults[i].price
-        | &nbsp;
-        button.btn.btn-primary(type='Purchase') Purchase
-        | &nbsp;
-        button.btn.btn-primary(type='Purchase') Add to Cart
-    -}
-    p
-      .row
-          p
-          .col-md-3
-              p.lead Browse
-              .list-group
-                  a.list-group-item(href='#') Drama
-                  a.list-group-item(href='#') Children
-                  a.list-group-item(href='#') Action
-                  a.list-group-item(href='#') Romance
-                  a.list-group-item(href='#') Mystery
-                  a.list-group-item(href='#') Horror
-
-            p.lead Popular Reading
-              .list-group
-                  a.list-group-item(href='#') Top10
-                  a.list-group-item(href='#') Highest rated
-                  a.list-group-item(href='#') Best Sellers
-                  a.list-group-item(href='#') Recommended reading
-
-            p.lead Popular Authors
-              .list-group
-                  a.list-group-item(href='#') J.K. Rowling
-                  a.list-group-item(href='#') John Grisham
-                  a.list-group-item(href='#') George R. R. Martin
-
+    .container
+            -var bookResponse = results //- Get search results
+            - for(var i = 0; i < 8; ++i){
+                .col-md-3
+                    .panel.panel-primary
+                        .panel-body
+                            p
+                            img.img-responsive.center-block(src=bookResponse[i].image, alt=bookResponse[i].bookname, style='width:100px;height:100px;')
+                            | &nbsp;
+                            p= bookResponse[i].bookname
+                            p= 'Author: '+bookResponse[i].author
+                            p= 'Price: $'+bookResponse[i].price
+                            | &nbsp;
+                            button#Information(value=bookResponse[i].bookid) Information
+                            button#Price(value=bookResponse[i].price) Price
+                            button#AddToCart(value=bookResponse[i].bookname) Name
+                            br
+                            | &nbsp;
+                            button.btn.btn-primary.pull-left(type='Purchase') Purchase
+                            | &nbsp;
+                            button.btn.btn-primary.pull-right(type='Purchase') Add to Cart
+            -} 
 script(src='/public/javascripts/addToCart.js')
+

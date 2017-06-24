@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require("body-parser");
 
-// Need to move all databasing work to another javascript file, do all the work in 1 file.
 var pg = require('pg')
   , connectionString = process.env.DATABASE_URL || 'postgres://postgres:password@localhost:5432/accounts'
   , client
@@ -11,14 +10,10 @@ var pg = require('pg')
 client = new pg.Client(connectionString);
 client.connect();
 
-// Working very well, displaying database items
-
-/* GET search page. */
+// http://localhost:8000/search 
 router.get('/', function(req, res, next) {
 	var searchReq = req.query.s;
-	//console.log(req.query.s); 	// req.query.s retrieves name of search
-
-	query = client.query("SELECT * FROM books_db WHERE bookname LIKE '%"+searchReq+"%' OR author LIKE '%"+searchReq+"%';");	// Add Genre, 
+	query = client.query("SELECT * FROM books_db WHERE bookname LIKE '%"+searchReq+"%' OR author LIKE '%"+searchReq+"%' OR Genre LIKE '%"+searchReq+"%';");
  	var results = []
  	// Stream results back one row at a time
  	query.on('row', function(row) {
@@ -28,5 +23,6 @@ router.get('/', function(req, res, next) {
  	 res.render('search', { title: 'Search', results: results, searchRequest: searchReq });
  	 });
  	});
+
 
 module.exports = router;

@@ -9,11 +9,12 @@ var pg = require('pg')
 client = new pg.Client(connectionString);
 client.connect();
 
-/* GET signup page. */
+// http://localhost:8000/signup
 router.get('/', function(req, res, next) {
   res.render('signup', { title: 'Sign up' });
 });
 
+// http://localhost:8000/signup/send
 router.post('/send', function(req, res, next){
     var name = req.body.name;
     var email = req.body.email;
