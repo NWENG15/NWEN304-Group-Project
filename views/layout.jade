@@ -25,19 +25,13 @@ Body
           ul.nav.navbar-nav
             li.active
               a(href='/') Home
-            li
-              a(href='/browse') Browse              
-            li
-              a(href='/contact') Contact
-            li
-              a(href='/about') About
 
           .col-sm-3.col-md-3.pull-right
-            form.navbar-form.navbar-right(role='search', method='GET', action= '/search')
+            form.navbar-form.navbar-right(role='search', method='GET', action='/search')
               .input-group
                 input.form-control(type='text', name = 's', placeholder='Search')
-                span.input-group-btn
-                  button#searchButton.btn.btn-default(type='submit')
+                .input-group-btn
+                  button.btn.btn-default(type='submit')
                     span.glyphicon.glyphicon-search
 
           ul.nav.navbar-nav.navbar-right

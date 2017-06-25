@@ -17,6 +17,8 @@ var passport = require('passport');
 var flash = require('connect-flash');
 var session = require('express-session');
 
+
+
 // ENGINE setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade'); //html engine
@@ -46,9 +48,25 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
-app.listen(port, function() {
+// HTTPS
+var fs = require('fs');
+var https = require('https');
+var privateKey = fs.readFileSync('https/key.pem');
+var certificate = fs.readFileSync('https/cert.pem');
+var credentials = {key: privateKey, cert: certificate};
+
+https.createServer({
+	key :  fs.readFileSync('https/key.pem'),
+	cert : fs.readFileSync('https/cert.pem')
+	}, app).listen(port, function() {
   console.log('Listening on:', port);
 });
+
+
+
+//app.listen(port, function() {
+//  console.log('Listening on:', port);
+//});
 
 //httpServer.listen(port);
 //httpsServer.listen(port);

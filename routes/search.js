@@ -14,15 +14,17 @@ client.connect();
 router.get('/', function(req, res, next) {
 	var searchReq = req.query.s;
 	query = client.query("SELECT * FROM books_db WHERE bookname LIKE '%"+searchReq+"%' OR author LIKE '%"+searchReq+"%' OR Genre LIKE '%"+searchReq+"%';");
- 	var results = []
- 	// Stream results back one row at a time
+ 	var results = [];
+ 	 //Stream results back one row at a time
  	query.on('row', function(row) {
  	 	results.push(row);
 	 });
  	 query.on('end', function() {
- 	 res.render('search', { title: 'Search', results: results, searchRequest: searchReq });
+ 	 res.render('search', { title: 'Search', results : results});
  	 });
  	});
+
+
 
 
 module.exports = router;

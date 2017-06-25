@@ -1,0 +1,14 @@
+//https.createServer({
+//	key :  fs.readFileSync('https/key.pem'),
+//	cert : fs.readFileSync('https/cert.pem')
+//}, app).listen(port, function() {
+//  console.log('Listening on:', port);
+//});
+
+
+// HTTPS
+//var fs = require('fs');
+//var https = require('https');
+//var privateKey = fs.readFileSync('https/key.pem');
+//var certificate = fs.readFileSync('https/cert.pem');
+//var credentials = {key: privateKey, cert: certificate};

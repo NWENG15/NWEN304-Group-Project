@@ -27,16 +27,13 @@ router.get('/', function(req, res, next) {
 /* GET http://localhost:8000/browse/:id */
 router.get('/:id', function(req, res, next) {
 	var id = req.params.id;
-	// Validate id != undefined
-
-	console.log("SELECT * FROM books_db WHERE bookid="+req.params.id+";");
   	query = client.query("SELECT * FROM books_db WHERE bookid="+req.params.id+";");
  	var book = [];
  	query.on('row', function(row) {
  	 	book.push(row);
 	 });
  	 query.on('end', function() {
- 	 res.render('book', { title: 'Browse All Products', book : book });
+ 	 res.render('index', { title: 'Browse All Products', book : book });
  	});
 });
 

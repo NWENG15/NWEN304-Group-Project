@@ -1,10 +1,21 @@
+button(onclick='goBack()') Go Back
+script.
+  function goBack() {
+  window.history.back();
+  }
 block content
     .container
+        - for(var i = 0; i < book.length; ++i){
         .col-md-3
             .panel.panel-primary
                 .panel-body
-                    img.img-thumbnail(src=book[0].image, alt='Cinque Terre', width='304', height='236')
+                    img.img-thumbnail(src=book[i].image, alt='book[i].name', width='304', height='236')
                     | &nbsp;
-                    p= book[0].bookname
-                    p= 'Author: '+book[0].author
-                    p= 'Price: $'+book[0].price
+                    p= book[i].bookname
+                    p= 'Author: '+book[i].author
+                    p= 'Price: $'+book[i].price
+                    | &nbsp;
+                    button.btn.btn-primary.pull-left(value=book[i].bookid) Purchase
+                    | &nbsp;
+                    button.btn.btn-primary.pull-right(value=book[i].price, href='/'+book[i].bookid) Add to cart
+        - }
