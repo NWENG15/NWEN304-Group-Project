@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	var str = String(window.location);
-	
+	//alert('got login.js');
 	//current link does not use a token
 	if(!str.includes("?token=")){ 
 		//check if we have a token saved
@@ -20,13 +20,14 @@ $(document).ready(function(){
 
 	
 	//when submitting a login form
-	$("#login").on('submit',function(e){
-		//alert('caught submit for login');
-		e.preventDefault();
+	$(".log").click(function(){
+	//$("#login").on('submit',function(e){
+	//	alert('caught submit for login');
+		//e.preventDefault();
 		var email = document.forms["auth"]["email"].value;
 		var password = document.forms["auth"]["password"].value;
 		var formData = {email: email, password: password};
-
+		alert(formData);
 		$.post('/login/send',formData, function(data, status){
 			if(status =="success" && data.token !== undefined){
 				localStorage.setItem('bookToken', data.token); //set token in browser

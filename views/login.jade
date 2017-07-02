@@ -2,9 +2,11 @@ extends layout
 
 block content
 	.container
-		form(action='/login', method='post')
-		label Username:
-		input.form-control.login-input(name='username', type='text', required='', placeholder='')
-		label Password:
-		input.form-control.login-input(name='password', type='password', required='', placeholder='')
-		button.btn.btn-primary.btn-large.max-width(type='submit') Login
+		form#login(name = 'auth' method='POST',action='/login/send')
+			div.form-group
+				label(for='email') Email:  
+				input#email.form-control(type='email', placeholder='name@email.com' name='email')
+			div.form-group
+				label(for='pw') Password:
+				input#pw.form-control(type='password' name='password')
+			button.btn.btn-primary.btn-large.max-width(type='submit') Login

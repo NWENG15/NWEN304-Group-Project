@@ -32,10 +32,52 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-
+//jsontoken
+var jwt = require('jsonwebtoken');
+app.set('passCode', 'Fpuqxcp9RoGDqEVF'); // for jwt
 
 // PATH
 app.use(express.static(path.join(__dirname, 'public')));
+
+//TODO: put in seperate file to be more readable
+//middleware
+app.use(function (req,res,next){
+	console.log("token check function");
+
+	var token = req.body.token || req.query.token || req.headers['x-access-token'];
+	
+	//if a token is given
+	if(token){
+		console.log('token recieved: '+token);
+		console.log('passCode: '+app.get('passCode'));
+
+		//console.log("found token");
+		jwt.verify(token, String(app.get('passCode')), function(err, decoded) {
+			if (err) {
+				console.log('error: '+err);
+				
+				//login token has expired
+				if(err.message == 'jwt expired')
+					res.render('forceLogout', { title: 'forceLogout' });
+				next();				
+			}
+			else{
+				console.log("token authenticated");
+				console.log('decoded: '+ decoded.email);
+				req.decoded = decoded;
+				console.log('req.decoded: '+ req.decoded);				
+				
+				next();
+			}
+		
+		});
+	}
+	else{
+		console.log("no token found");
+		next();
+	}
+});
+
 
 // ROUTING USE
 app.use('/', require('./routes/index'));

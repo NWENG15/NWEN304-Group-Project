@@ -18,6 +18,7 @@ router.get('/', function(req, res, next) {
 
 // http://localhost:8000/signup
 router.post('/', function(req, res, next){
+	console.log("started signup function");
     var name = req.body.name;
     var email = req.body.email;
     var password = req.body.password;
@@ -42,6 +43,7 @@ router.post('/', function(req, res, next){
 	});
 	query = client.query('INSERT INTO accounts_db (UserID, Username, Password, EmailAddress,  AdminAccount) '+
 	'VALUES (DEFAULT, $1, $2, $3, $4)', [name, password, email,'false']);
+	console.log("done adding new user");
 	res.render('login', { title: 'Login' });
 
 });

@@ -26,6 +26,7 @@ router.get('/', function(req, res, next) {
 
 
 router.post('/send',function(req,res,next){
+	//console.log('start login function');
 	var email = req.body.email;
 	var password = req.body.password;
 

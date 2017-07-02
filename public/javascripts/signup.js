@@ -1,7 +1,7 @@
-$(document).ready(function(){
+/*$(document).ready(function(){
     $("#test2").on('submit', function(e){
         e.preventDefault();
-        alert('test')
+        alert('test');
     });
 
 function validateInput(name, email, password, password1){
@@ -22,10 +22,9 @@ function validateInput(name, email, password, password1){
 
 	//var formData = {name: userName,email: userEmail, favoriteBook: favBook, password: password1};
 	$.post('/signup/send',formData);
-	
 	window.location = '/login';
 }
-
+*/
 //$('#test').click(function(evt){
 	//alert('button pressed');
 	//evt.preventDefault();
