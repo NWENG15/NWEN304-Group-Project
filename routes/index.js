@@ -11,9 +11,10 @@ var pg = require('pg')
 client = new pg.Client(connectionString);
 client.connect();
 
-
-// http://localhost:8000/
+// GET http://localhost:8000/
 	router.get('/', function(req, res, next) {
+		client = new pg.Client(connectionString);
+		client.connect();
   		query = client.query("SELECT * FROM books_db;");
  		var results = []
  		query.on('row', function(row) {
@@ -24,34 +25,83 @@ client.connect();
  	});
 });
 
-	/* GET http://localhost:8000/book/:id */
-	router.get('/book/:id', function(req, res, next) {
-		var id = req.params.id;
-	// Validate id != undefined
-		//console.log("SELECT * FROM books_db WHERE bookid="+req.params.id+";");
-  		query = client.query("SELECT * FROM books_db WHERE bookid="+req.params.id+";");
- 		var book = [];
+// GET http://localhost:8000/books
+	router.get('/books/', function(req, res, next) {
+		query = client.query("SELECT * FROM books_db;");	
+		var results = []
  		query.on('row', function(row) {
- 	 	book.push(row);
+ 	 	results.push(row);
 	 });
  	 	query.on('end', function() {
- 	 	res.render('book', { title: 'Browse All Products', book : book });
+ 	 	res.status(200).json({success: true, data: results});
+ 		});
  	});
+
+/* GET http://localhost:8000/books/:id */
+	router.get('/books/:id', function(req, res, next) {
+		var id = req.params.id;
+		if(typeof id == 'undefined'){
+			return res.status(500).json({success: false, data: 'invalid book id'});
+		}else{ 
+			next();
+		}
+	}, function(req, res, next){
+  			query = client.query("SELECT * FROM books_db WHERE bookid="+req.params.id+";");
+ 			var book = [];
+ 				query.on('row', function(row) {
+ 	 				book.push(row);
+	 			});
+ 	 			query.on('end', function() {
+ 	 				//res.render('book', { title: 'Browse All Products', book : book });	// Can render a book object
+ 	 				res.status(200).json({success: true, data: book});
+ 				});
 });
 
+/* GET http://localhost:8000/search/:id */
 	router.get('/search/:id', function(req, res, next){
-	console.log('here');
 	var searchReq = req.params.id;
-	
+		if(typeof id == 'undefined' || typeof searchReq == ''){
+			return res.status(500).json({success: false, data: 'invalid book id'});
+		}else{ 
+			next();
+		}
+	}, function(req, res, next){		
 	query = client.query("SELECT * FROM books_db WHERE bookname LIKE '%"+searchReq+"%' OR author LIKE '%"+searchReq+"%' OR Genre LIKE '%"+searchReq+"%';");
  	var book = [];
  	query.on('row', function(row) {
  	 	book.push(row);
 	 });
  	 query.on('end', function() {
- 	 res.render('book', { title: 'Search', book: book });
+ 	 //res.render('book', { title: 'Search', book: book });		// Can render a book object
+ 	 res.status(200).json({success: true, data: book});	// Proper api return
  	 });
+});
+
+	// GET http://localhost:8000/users
+	router.get('/users/', function(req, res, next) {
+		query = client.query("SELECT * FROM accounts_db;");	
+		var results = []
+ 		query.on('row', function(row) {
+ 	 	results.push(row);
+	 });
+ 	 	query.on('end', function() {
+ 	 	res.status(200).json({success: true, data: results});
+ 		});
  	});
+
+ 		// GET http://localhost:8000/users/:id
+	router.get('/users/:id', function(req, res, next) {
+		var searchReq = req.params.id;
+		query = client.query("SELECT * FROM accounts_db WHERE userid="+req.params.id+";");	
+		var results = []
+ 		query.on('row', function(row) {
+ 	 	results.push(row);
+	 });
+ 	 	query.on('end', function() {
+ 	 	res.status(200).json({success: true, data: results});
+ 		});
+ 	});
+
 
 
 

@@ -1,4 +1,3 @@
-var pg = require('pg');
 var express = require('express');
 var router = express.Router();
 var bodyParser = require("body-parser");
@@ -12,22 +11,17 @@ var pg = require('pg')
 client = new pg.Client(connectionString);
 client.connect();
 
-// http://localhost:8000/book/ 
-//router.get('/', function(req, res, next) {
-	//var bookid = req.params.bookid
-	//console.log(bookid);
-	// Validate id != undefined
-	//console.log("SELECT * FROM books_db WHERE bookid="+req.params.id+";");
-  	//query = client.query("SELECT * FROM books_db WHERE bookid="+req.params.id+";");
- 	//var book = [];
- 	//query.on('row', function(row) {
- 	// 	book.push(row);
-	//});
- 	// query.on('end', function() {
- 	// res.render('index', { title: 'Browse All Products', book : book });
- 	//});
- 	//});
-
-
+	/* GET http://localhost:8000/book/information */
+	router.get('/information/:id', function(req, res, next) {
+	var searchReq = req.params.id;
+	query = client.query("SELECT * FROM books_db WHERE bookid="+req.params.id+";");
+ 	var results = [];
+ 	query.on('row', function(row) {
+ 	 	results.push(row);
+	 });
+ 	 query.on('end', function() {
+ 	 res.render('search', { title: 'Search', results : results});
+ 	 });
+ 	});
 	
 module.exports = router;

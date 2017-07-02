@@ -8,7 +8,4 @@ $(document).ready(function(e) {
 			console.log('Database retrieval successful!'); 
 			}
 		});	
-
-
-
 });

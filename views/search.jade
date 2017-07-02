@@ -16,7 +16,5 @@ block content
                             //- p= bookResponse[i].description
                             p= 'Price: $'+bookResponse[i].price
                             | &nbsp;
-                            button.btn.btn-primary(type='Purchase') Purchase
-                            | &nbsp;
-                            button.btn.btn-primary(type='Purchase') Add to Cart
-            -}        
+                            button.btn.btn-primary.center-block(value=bookResponse[i].bookid) Information
+            -} 

@@ -13,14 +13,7 @@ block content
                             p= 'Author: '+bookResponse[i].author
                             p= 'Price: $'+bookResponse[i].price
                             | &nbsp;
-                            button#Information(value=bookResponse[i].bookid) Information
-                            button#Price(value=bookResponse[i].price) Price
-                            button#AddToCart(value=bookResponse[i].bookname) Name
-                            br
-                            | &nbsp;
-                            button.btn.btn-primary.pull-left(type='Purchase') Purchase
-                            | &nbsp;
-                            button.btn.btn-primary.pull-right(type='Purchase') Add to Cart
+                            button.btn.btn-primary.center-block(value=bookResponse[i].bookid) Information
+                            //- button.btn.btn-primary.pull-right(value=bookResponse[i].price, href='/'+bookResponse[i].bookid) Add to cart
             -} 
 script(src='/public/javascripts/addToCart.js')
-

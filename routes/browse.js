@@ -12,42 +12,36 @@ var pg = require('pg')
 client = new pg.Client(connectionString);
 client.connect();
 
-// http://localhost:8000/browse 
-router.get('/', function(req, res, next) {
-  	query = client.query("SELECT * FROM books_db;");
- 	var results = []
- 	query.on('row', function(row) {
+// GET http://localhost:8000/browse
+	router.get('/', function(req, res, next) {
+		client = new pg.Client(connectionString);
+		client.connect();
+  		query = client.query("SELECT * FROM books_db;");
+ 		var results = [];
+ 		query.on('row', function(row) {
  	 	results.push(row);
 	 });
- 	 query.on('end', function() {
- 	 res.render('browse', { title: 'Browse All Products', results: results });
+ 	 	query.on('end', function() {
+ 	 	//findPopular(results);	// Reorder by popularity
+ 	 	results = shuffleArray(results);
+ 	 	res.render('browse', { title: 'browse', results: results });
  	});
 });
 
-/* GET http://localhost:8000/browse/:id */
-router.get('/:id', function(req, res, next) {
-	var id = req.params.id;
-  	query = client.query("SELECT * FROM books_db WHERE bookid="+req.params.id+";");
- 	var book = [];
- 	query.on('row', function(row) {
- 	 	book.push(row);
-	 });
- 	 query.on('end', function() {
- 	 res.render('index', { title: 'Browse All Products', book : book });
- 	});
-});
+	function randomResults(results){
+		for(var i = 0; i < results.length; i++){	
+			//console.log(results[i].popularity);
+		}
+	}
 
-
-//var bookID = req.params.id;
-//query = client.query("SELECT * FROM books_db WHERE bookid="+bookID+";");
-//	var results = []
-// 	// Stream results back one row at a time
-// 	query.on('row', function(row) {
-// 	 	results.push(row);
-//	 });
-// 	 query.on('end', function() {
-// 	 res.render('book', { title: 'Information', results: results });
-// 	});
-//});
+function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    return array;
+}
 
 module.exports = router;
