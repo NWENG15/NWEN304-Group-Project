@@ -1,16 +1,12 @@
 $(document).ready(function(){
-	alert('ready!')
-	$('#submit').click(function(){
-		//e.preventDefault();
-		alert('we here?');
-		//validateInput();
-	});
-
-});
+    $("#test2").on('submit', function(e){
+        e.preventDefault();
+        alert('test')
+    });
 
 function validateInput(name, email, password, password1){
 	if (name === ""){
-		console.log('Name field is blank');
+		alert('Name field is blank');
 		return false;
 	}
 	if (email === ""){
@@ -25,9 +21,9 @@ function validateInput(name, email, password, password1){
 }
 
 	//var formData = {name: userName,email: userEmail, favoriteBook: favBook, password: password1};
-	//$.post('/signup/send',formData);
+	$.post('/signup/send',formData);
 	
-	//window.location = '/login';
+	window.location = '/login';
 }
 
 //$('#test').click(function(evt){

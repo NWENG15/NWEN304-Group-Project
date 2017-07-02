@@ -25,14 +25,14 @@ router.post('/', function(req, res, next){
 
     //var check = validateInput(name, email, password, password1);
     if (name === ""){
-		console.log('Name field is blank');
-		res.send({data: 'test'})
+		//console.log('Name field is blank');
+		//res.send({data: 'Name field is blank'})
 	}
 	if (email === ""){
-		console.log('email is blank');
+		//console.log('email is blank');
 	}
 	if(password !== password1 || password1 ===""){
-		console.log('Passwords are not identical');
+		//console.log('Passwords are not identical');
 	}
     var passHash;
 	bcrypt.hash(password, null, null, function(err, hash) {
@@ -42,7 +42,7 @@ router.post('/', function(req, res, next){
 	});
 	query = client.query('INSERT INTO accounts_db (UserID, Username, Password, EmailAddress,  AdminAccount) '+
 	'VALUES (DEFAULT, $1, $2, $3, $4)', [name, password, email,'false']);
-	//res.render('login', { title: 'Login' });
+	res.render('login', { title: 'Login' });
 
 });
 
