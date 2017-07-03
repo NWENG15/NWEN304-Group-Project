@@ -9,7 +9,13 @@ $(document).ready(function(){
 	if(!str.includes("?token=")){ 
 		//check if we have a token saved
 		if(localStorage.getItem('bookToken') != null) {
-			str = str.concat('?token=');
+			//if we are searching as well
+			if(str.includes("search")){ 
+				str = str.concat('&?token=');
+			}
+			else{
+				str = str.concat('?token=');
+			}
 			str = str.concat(String(localStorage.getItem('bookToken')))
 			window.location = str; //redirect to same location with token
 		}
