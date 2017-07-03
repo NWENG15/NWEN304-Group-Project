@@ -30,13 +30,6 @@ router.get('/', function(req, res, next) {
 router.post('/send',function(req,res,next){
 	var email = req.body.email;
 	var password = req.body.password;
-
-	//testing only
-	query = client.query("SELECT * FROM accounts_db",function(err,DB){
-		for(var i = 0; i <DB.rows.length;i++){
-			console.log(DB.rows[i]);
-		}
-	});
 	
 	//search DB for password of given email
 	query = client.query("SELECT * FROM accounts_db where emailaddress = '"+email+"'",function(err,DB){
@@ -44,10 +37,6 @@ router.post('/send',function(req,res,next){
 			return console.error('error running query', err);
 		if(DB.rows.length == 0)
 			return console.log("account not found");
-		 //testing only
-		//for(var i = 0; i <DB.rows.length;i++){
-		//	console.log(DB.rows[i]);
-		//}
 		
 		var hash = DB.rows[0].password; //get hash of password from DB
 		var userName = DB.rows[0].username; //get from DB
@@ -73,62 +62,6 @@ router.post('/send',function(req,res,next){
 		});//end bcrpyt		
 	});//end query
   });
-
-  
-  
-
-  
-  
-  
-  
-  
-  
-  
-/*
-module.exports = function(app, passport){
-// GET login page. 
-router.get('/login', function(req, res, next) {
-  res.render('login', { title: 'Login' });
-});
-router.post('/auth',function(req,res,next){
-	var email = req.body.email;
-	var password = req.body.password;
-	
-	var userName;
-	
-	// if (!user) {
-    //  res.json({ success: false, message: 'Authentication failed. User not found.' });
-	//get hash from db
-	var hash = '$2a$10$Smw6nM1Ztu72tMaeiw.TI.Yt1o2kTilsbJy5QkYfDX7S/KJBqbqEq'; //for password = gg, replace with hash from DB
-	
-	
-	//check validity of password given
-	bcrypt.compare(password, hash, function(err, hashbool) {
-		//password and hash match,
-		if(hashbool != true){
-			res.json({ success: false, message: 'Authentication failed. Wrong password.' });
-			console.log("hash and password do not match");
-			}
-		});
-	// if user is found and password is right
-	// create a token
-	var token = jwt.sign(user, app.get('passCode'), {
-	  expiresInMinutes: 1440 // expires in 24 hours
-	});
-	// return the information including token as JSON
-	res.json({
-	  success: true,
-	  message: 'Enjoy your token!',
-	  token: token
-	}); 
-    
-  });
-router.post('/login',
-	passport.authenticate('local',{ 
-	successRedirect: '/',
-	failureRedirect: '/login' }));
-}
-*/
 
 	
 module.exports = router;

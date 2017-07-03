@@ -6,28 +6,29 @@ block content
       .col-md-6.col-md-offset-3
         h1.display-4.m-b-2 My Account
 
-        form#changeEmail(name = "changeName", method='POST')
+        form#changeEmail(name = "cEmail", method='POST')
           div.form-group.has-danger
             label(for='email') New Email:  
             input#email.form-control(type='email', placeholder='name@email.com' name='email')
           button#test.btn.btn-primary(type='submit') Change Email
         br
-        form#changeName(name = "changeName", method='POST')
+        form#changeName(name = "cName", method='POST')
           div.form-group
             label(for='name') New Name: 
             input#name.form-control(type='text', placeholder='First and Last' name='name', require='')
           button#test.btn.btn-primary(type='submit') Change Name
         br
-        form#changePassword(name = "changeName", method='POST')
+        form#changePassword(name = "cPass", method='POST')
           div.form-group
             label(for='pw') Old Password:
-            input#pw.form-control(type='password' name='password')
+            input#pw.form-control(type='password' name='oldPassword')
           div.form-group
-            label(for='pw') New Password:
-            input#pw.form-control(type='password' name='password')
+            label(for='pw1') New Password:
+            input#pw.form-control(type='password' name='newPassword')
           div.form-group
             label(for='pw2') Confirm New Password:
-            input#pw2.form-control(type='password' name='confirmPassword')
+            input#pw2.form-control(type='password' name='newConfirmPassword')
           button#test.btn.btn-primary(type='submit') Change Password
 
-script(src='javascripts/signup.js')
+
+script(src='javascripts/myAccountScripts.js')

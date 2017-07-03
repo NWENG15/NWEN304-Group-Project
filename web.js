@@ -42,16 +42,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 //TODO: put in seperate file to be more readable
 //middleware
 app.use(function (req,res,next){
-	console.log("token check function");
-
 	var token = req.body.token || req.query.token || req.headers['x-access-token'];
-	
 	//if a token is given
 	if(token){
-		console.log('token recieved: '+token);
-		console.log('passCode: '+app.get('passCode'));
-
-		//console.log("found token");
 		jwt.verify(token, String(app.get('passCode')), function(err, decoded) {
 			if (err) {
 				console.log('error: '+err);
@@ -62,18 +55,13 @@ app.use(function (req,res,next){
 				next();				
 			}
 			else{
-				console.log("token authenticated");
-				console.log('decoded: '+ decoded.email);
-				req.decoded = decoded;
-				console.log('req.decoded: '+ req.decoded);				
-				
-				next();
+				req.decoded = decoded.email;//add email				
+				next();//go to next function
 			}
 		
 		});
 	}
-	else{
-		console.log("no token found");
+	else{ //no token, continue on
 		next();
 	}
 });
