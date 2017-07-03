@@ -40,11 +40,13 @@ router.post('/', function(req, res, next){
     // Store hash in your password DB.
 		//console.log(hash);
 		passHash = hash;
+		
+		query = client.query('INSERT INTO accounts_db (UserID, Username, Password, EmailAddress,  AdminAccount) '+
+		'VALUES (DEFAULT, $1, $2, $3, $4)', [name, hash, email,'false']);
+		console.log("done adding new user with "+name+", "+email+", "+password+", "+String(passHash));
+		res.render('login', { title: 'Login' });
 	});
-	query = client.query('INSERT INTO accounts_db (UserID, Username, Password, EmailAddress,  AdminAccount) '+
-	'VALUES (DEFAULT, $1, $2, $3, $4)', [name, password, email,'false']);
-	console.log("done adding new user");
-	res.render('login', { title: 'Login' });
+	
 
 });
 

@@ -9,8 +9,10 @@ var pg = require('pg')
  var bcrypt = require('bcrypt-nodejs');
 app.set('passCode', 'Fpuqxcp9RoGDqEVF'); // for jwt 
 
-  
 var jwt = require('jsonwebtoken');
+
+client = new pg.Client(connectionString);
+client.connect();
 
 // GET login page. 
 router.get('/', function(req, res, next) {
@@ -26,43 +28,48 @@ router.get('/', function(req, res, next) {
 
 
 router.post('/send',function(req,res,next){
-	//console.log('start login function');
 	var email = req.body.email;
 	var password = req.body.password;
 
-	//TODO: actually connect to DB 
-	
-	var userName = 'Connor'; //get from DB
-	
-	//need to check DB for the email
-	// if (!email) {
-    //  res.json({ success: false, message: 'Authentication failed. User not found.' }); //reply to invalid username
-	
-	//get hash from db
-	var hash = '$2a$10$Smw6nM1Ztu72tMaeiw.TI.Yt1o2kTilsbJy5QkYfDX7S/KJBqbqEq'; //for password = gg, replace with hash from DB
-	
-	
-	
-	//check validity of password given
-	bcrypt.compare(password, hash, function(err, match) {
-		//password and hash match
-		if(match){	
-			// if user is found and password is right
-			var token = jwt.sign({email: email, userName : userName}, String(app.get('passCode')),{expiresIn: '1hr'});	// create a token
-			res.json({//reply to user 
-				success: true,
-				email: email,
-				userName: userName, //replace with user name from DB
-				token: token
-			}); 
+	/*//testing only
+	query = client.query("SELECT * FROM accounts_db",function(err,DB){
+		for(var i = 0; i <DB.rows.length;i++){
+			console.log(DB.rows[i]);
 		}
-		//password given and hash stored in DB do not match
-		else{
-			res.json({ success: false, message: 'Wrong password given.' });
-			//res.redirect('/signin');
+	});*/
+	
+	//search DB for password of given email
+	query = client.query("SELECT * FROM accounts_db where emailaddress = '"+email+"'",function(err,DB){
+		if(err)
+			return console.error('error running query', err);
+		/* testing only
+		for(var i = 0; i <DB.rows.length;i++){
+			console.log(DB.rows[i]);
 		}
-	});
-
+		*/
+		var hash = DB.rows[0].password; //get hash of password from DB
+		var userName = DB.rows[0].username; //get from DB
+		
+		//check validity of password given
+		bcrypt.compare(password, hash, function(err, match) {
+			//password and hash match
+			if(match){	
+				// if user is found and password is right
+				var token = jwt.sign({email: email, userName : userName}, String(app.get('passCode')),{expiresIn: '1hr'});	// create a token
+				res.json({//reply to user 
+					success: true,
+					email: email,
+					userName: userName, //replace with user name from DB
+					token: token
+				}); 
+			}
+			//password given and hash stored in DB do not match
+			else{
+				res.json({ success: false, message: 'Wrong password given.' });
+				//res.redirect('/signin');
+			}
+		});//end bcrpyt		
+	});//end query
   });
 
   
