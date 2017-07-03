@@ -23,29 +23,27 @@ router.post('/', function(req, res, next){
     var email = req.body.email;
     var password = req.body.password;
     var password1 = req.body.confirmPassword;
-
-    //var check = validateInput(name, email, password, password1);
-    if (name === ""){
-		//console.log('Name field is blank');
-		//res.send({data: 'Name field is blank'})
-	}
-	if (email === ""){
-		//console.log('email is blank');
-	}
-	if(password !== password1 || password1 ===""){
-		//console.log('Passwords are not identical');
-	}
-    var passHash;
-	bcrypt.hash(password, null, null, function(err, hash) {
-    // Store hash in your password DB.
-		//console.log(hash);
-		passHash = hash;
-		
-		query = client.query('INSERT INTO accounts_db (UserID, Username, Password, EmailAddress,  AdminAccount) '+
-		'VALUES (DEFAULT, $1, $2, $3, $4)', [name, hash, email,'false']);
-		console.log("done adding new user with "+name+", "+email+", "+password+", "+String(passHash));
-		res.render('login', { title: 'Login' });
-	});
+   
+	query = client.query("SELECT * FROM accounts_db where emailaddress = '"+email+"'",function(err,DB){
+		console.log("accounts registered to "+email+" is: "+DB.rows.length);
+		//email already registered
+		if(DB.rows.length != 0){
+			res.json({
+				success: false,
+				reason: 'invalid email'
+			});
+			return;
+		}
+		else{
+			bcrypt.hash(password, null, null, function(err, hash) {
+				// Store hash in your password DB.
+				query = client.query('INSERT INTO accounts_db (UserID, Username, Password, EmailAddress,  AdminAccount) '+
+				'VALUES (DEFAULT, $1, $2, $3, $4)', [name, hash, email,'false']);
+				console.log("done adding new user with "+name+", "+email+", "+hash);
+				res.render('login', { title: 'Login' });
+			});//end bcrypt
+		}
+	});//end query
 	
 
 });

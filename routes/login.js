@@ -31,22 +31,24 @@ router.post('/send',function(req,res,next){
 	var email = req.body.email;
 	var password = req.body.password;
 
-	/*//testing only
+	//testing only
 	query = client.query("SELECT * FROM accounts_db",function(err,DB){
 		for(var i = 0; i <DB.rows.length;i++){
 			console.log(DB.rows[i]);
 		}
-	});*/
+	});
 	
 	//search DB for password of given email
 	query = client.query("SELECT * FROM accounts_db where emailaddress = '"+email+"'",function(err,DB){
 		if(err)
 			return console.error('error running query', err);
-		/* testing only
-		for(var i = 0; i <DB.rows.length;i++){
-			console.log(DB.rows[i]);
-		}
-		*/
+		if(DB.rows.length == 0)
+			return console.log("account not found");
+		 //testing only
+		//for(var i = 0; i <DB.rows.length;i++){
+		//	console.log(DB.rows[i]);
+		//}
+		
 		var hash = DB.rows[0].password; //get hash of password from DB
 		var userName = DB.rows[0].username; //get from DB
 		

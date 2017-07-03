@@ -9,8 +9,8 @@ $(document).ready(function(){
 	if(!str.includes("?token=")){ 
 		//check if we have a token saved
 		if(localStorage.getItem('bookToken') != null) {
-			//if we are searching as well
-			if(str.includes("search")){ 
+			
+			if(str.includes("search")){ //if we are searching as well
 				str = str.concat('&?token=');
 			}
 			else{
@@ -24,7 +24,7 @@ $(document).ready(function(){
 	//Change Navbar if a user is logged in 
 	var userEmail = localStorage.getItem('email');
 	if(userEmail != null){
-		$('#signup').text(userEmail); //redundent
+		$('#signup').text(userEmail); 
 		$('#logInButton').text('Logout')
 	}
 

@@ -86,6 +86,8 @@ app.use('/login', require('./routes/login'));
 app.use('/signup', require('./routes/signup'));
 app.use('/search', require('./routes/search'));
 app.use('/book', require('./routes/book'));
+app.use('/MyAccount', require('./routes/MyAccount'));
+
 
 
 
