@@ -1,0 +1,11 @@
+Register our user with server:
+	curl -X POST -d @user.json http://localhost:8000/signup --header "Content-Type:application/json" 
+
+Login and get authentication token:
+	curl -X POST -d @user.json http://localhost:8000/login/send --header "Content-Type:application/json" > successfulLogin.json 
+
+Change User Password:
+	curl -X POST -d @changePass.json http://localhost:8000/MyAccount/password --header "Content-Type:application/json" > changePassResult.json
+	
+Change User Email address:
+	curl -X POST -d @changeEmail.json http://localhost:8000/MyAccount/email --header "Content-Type:application/json" > changeEmailResult.json
