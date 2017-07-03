@@ -1,0 +1,10 @@
+extends layout
+
+
+block content
+  .container
+    h1.display-4.m-b-2 Logout
+    h4.display-4.m-b-2#name Do you wish to logout as 
+    form#logout(name = 'logout' method = 'GET', action='/')
+    button.btn.btn-primary.btn-large.max-width.logout(type='submit') Click to Logout
+
