@@ -11,12 +11,12 @@ var pg = require('pg')
 client = new pg.Client(connectionString);
 client.connect();
 
-// http://localhost:8000/signup
+// GET http://localhost:8000/signup
 router.get('/', function(req, res, next) {
   res.render('signup', { title: 'Sign up' });
 });
 
-// http://localhost:8000/signup
+// POST http://localhost:8000/signup
 router.post('/', function(req, res, next){
 	console.log("started signup function");
     var name = req.body.name;
@@ -44,26 +44,5 @@ router.post('/', function(req, res, next){
 			});//end bcrypt
 		}
 	});//end query
-	
-
 });
-
-
-
-
-
-
-	// Error checking
-	//var errors = req.validationErrors();
-	//console.log(errors);
-
-	//if(errors){
-		// Respond with specific error message from messages.jade
-		// http://www.telerik.com/blogs/form-validation-with-expressjs
-		//res.render('signup', {title: 'Sign up', messages: errors });
-	//}else{
-		//res.render('signup', { title: 'Sign up' });
-	//}
-    //query = client.query('INSERT INTO accounts_db (UserID, Username, Password, EmailAddress) VALUES (DEFAULT, $1, $2, $3)', [name, email, password]);  
-
 module.exports = router;

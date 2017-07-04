@@ -14,9 +14,7 @@ client.connect();
 
 // GET http://localhost:8000/browse
 	router.get('/', function(req, res, next) {
-		client = new pg.Client(connectionString);
-		client.connect();
-  		query = client.query("SELECT * FROM books_db;");
+  	query = client.query("SELECT * FROM books_db;");
  		var results = [];
  		query.on('row', function(row) {
  	 	results.push(row);

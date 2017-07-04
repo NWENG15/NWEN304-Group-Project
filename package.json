@@ -1,11 +1,15 @@
 {
-  "name": "bookstore",
-  "version": "0.0.1",
-  "description": "Online Bookstore Group Project",
-  "engines": {
-    "node": "0.10.x"
+  "name": "nwen304-group-project",
+  "version": "1.0.0",
+  "description": "NWEN304 Group Project",
+  "main": "schema.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "author": "",
+  "license": "ISC",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.17.2",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.3",
@@ -14,17 +18,12 @@
     "express-session": "^1.15.3",
     "express-validator": "^3.2.0",
     "jade": "^1.11.0",
+    "jsonwebtoken": "^7.4.1",
     "morgan": "^1.8.2",
     "nodemailer": "*",
     "passport": "^0.3.2",
     "path": "^0.12.7",
     "pg": "^4.5.6",
     "serve-favicon": "^2.4.3"
-  },
-  "main": "schema.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC"
+  }
 }

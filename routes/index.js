@@ -13,8 +13,6 @@ client.connect();
 
 // GET http://localhost:8000/
 	router.get('/', function(req, res, next) {
-		client = new pg.Client(connectionString);
-		client.connect();
   		query = client.query("SELECT * FROM books_db;");
  		var results = []
  		query.on('row', function(row) {
@@ -101,10 +99,5 @@ client.connect();
  	 	res.status(200).json({success: true, data: results});
  		});
  	});
-
-
-
-
-
 
 module.exports = router;

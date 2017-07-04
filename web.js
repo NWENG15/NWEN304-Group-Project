@@ -39,6 +39,16 @@ app.set('passCode', 'Fpuqxcp9RoGDqEVF'); // for jwt
 // PATH
 app.use(express.static(path.join(__dirname, 'public')));
 
+// HTTPS REDIRECT
+app.use(function(req, res, next){
+  if (req.headers['x-forwarded-proto'] !== 'https') {
+    var httpsApp = ['https://blooming-bastion-13149.herokuapp.com', req.url].join('');
+    return res.redirect(httpsApp);
+  }else{
+    return next();
+  }
+});
+
 //TODO: put in seperate file to be more readable
 //middleware
 app.use(function (req,res,next){
@@ -85,7 +95,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
-// HTTPS
+// LOCAL HTTPS
 //var fs = require('fs');
 //var https = require('https');
 //var privateKey = fs.readFileSync('https/key.pem');
